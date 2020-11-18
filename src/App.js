@@ -5,6 +5,7 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 
 
 const particlesOptions = {
@@ -21,6 +22,23 @@ const particlesOptions = {
 
 class App extends Component {
 
+  constructor(){
+    super();
+    this.state={
+      input:'',
+      imageUrl:''
+    }
+  }
+
+  onButtonSubmit=()=>{
+    console.log('klik');
+    this.setState({input:this.state.imageUrl})
+  }
+
+  onInputChange=(event)=>{
+    this.setState({imageUrl:event.target.value})
+  }
+
   render() {
     return (
       <div className="App">
@@ -31,7 +49,8 @@ class App extends Component {
         <Navigation />
         <Logo />
         <Rank />
-        <ImageLinkForm />
+        <ImageLinkForm onButtonSubmit={this.onButtonSubmit} onInputChange={this.onInputChange}/>
+        <FaceRecognition imageUrl={this.state.input}/>
       </div>
     );
   }
